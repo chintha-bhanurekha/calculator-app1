@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+
+    <link rel="stylesheet" href="sty.css">
+</head>
+<body>
+    <h1>Calculator App</h1>
+    <div class="container">
+        <div class="result">
+            <p id="result">0</p>
+        </div>
+
+        <div class="buttons">
+            <div class="row">
+                <button id="color">C</button>
+                <button id="color">DEL</button>
+                <button id="color">+</button>
+                <button id="color">%</button>
+            </div>
+
+
+            <div class="row">
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button id="color">/</button>
+            </div>
+
+
+
+            <div class="row">
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button id="color">*</button>
+            </div>
+
+
+            <div class="row">
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button id="color">- </button>
+            </div>
+
+
+            <div class="row">
+                <button id="dot">.</button>
+                <button>0</button>
+                <button id="equal">=</button>
+                
+            </div>
+
+        </div>
+    </div>
+    
+    <script>
+    // Selecting result display
+    const result = document.getElementById("result");
+    const buttons = document.querySelectorAll("button");
+
+    let currentInput = "";
+
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            const value = button.textContent;
+
+            if (value === "C") {
+                currentInput = "";
+                result.textContent = "0";
+            } else if (value === "DEL") {
+                currentInput = currentInput.slice(0, -1);
+                result.textContent = currentInput || "0";
+            } else if (value === "=") {
+                try {
+                    const evaluated = eval(currentInput);
+                    result.textContent = evaluated;
+                    currentInput = evaluated.toString();
+                } catch {
+                    result.textContent = "Error";
+                    currentInput = "";
+                }
+            } else {
+                currentInput += value;
+                result.textContent = currentInput;
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
